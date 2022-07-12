@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './post.css'
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import axios from 'axios'
-import { format } from "timeago.js"
+// import { format } from "timeago.js"
 import { Link } from 'react-router-dom'
 
 // import { Users } from '../../dummyData'
@@ -41,7 +41,8 @@ export default function Post({ post }) {
                         <Link to={`profile/${user.username}`}>
                             <img className='postProfileImg' src={user.profilePicture || PF + "person/noAvatar.png"} alt="" />
                             <span className="postUsername">{user.username}</span>
-                            <span className="postDate">{format(post.createdAt)}</span>
+                            {/* <span className="postDate">{format(post.createdAt)}</span> */}
+                            <span className="postDate">{post.createdAt}</span>
                         </Link>
                     </div>
                     <div className="postTopRight">
