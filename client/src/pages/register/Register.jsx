@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useRef } from 'react'
 import './registre.css'
 
-import {Navigate, useNavigate} from 'react-router-dom'
+import { useNavigate} from 'react-router-dom'
 
 
 export default function Register() {
@@ -27,7 +27,7 @@ export default function Register() {
             }
             try{
                 
-                const res = await axios.post("auth/register", user)
+                await axios.post("auth/register", user)
                 navigate("/login");
 
             }catch(err){
