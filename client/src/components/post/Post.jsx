@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './post.css'
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import axios from 'axios'
+import {format} from "timeago.js"
 
 // import { Users } from '../../dummyData'
 
@@ -24,7 +25,7 @@ export default function Post({ post }) {
         }
         fetchUser();
     
-      },[])
+      },[post.userId])
     
 
     const likeHandler = () => {
@@ -38,7 +39,7 @@ export default function Post({ post }) {
                     <div className="postTopLeft">
                         <img className='postProfileImg' src={user.profilePicture ||PF+"person/noAvatar.png"} alt="" />
                         <span className="postUsername">{user.username}</span>
-                        <span className="postDate">{post.date}</span>
+                        <span className="postDate">{format(post.createdAt)}</span>
                     </div>
                     <div className="postTopRight">
                         <MoreVertIcon />
