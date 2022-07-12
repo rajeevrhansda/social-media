@@ -4,7 +4,7 @@ import Online from '../online/Online'
 import './rightbar.css'
 
 
-export default function Rightbar({ profile }) {
+export default function Rightbar({ user }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const HomeRightbar = () => {
@@ -26,58 +26,62 @@ export default function Rightbar({ profile }) {
       </>
     )
   }
-  const ProfileRightbar = ()=>{
-    return(
+  const ProfileRightbar = () => {
+    return (
       <>
-      <h4 className='rightbarTitle'>User information</h4>
-      <div className='rightbarInfo'>
-        <div className="rightbarInfoItem">
-          <span className="rightbatInfoKey">City:</span>
-          <span className="rightbatInfoValue">New York</span>
+        <h4 className='rightbarTitle'>User information</h4>
+        <div className='rightbarInfo'>
+          <div className="rightbarInfoItem">
+            <span className="rightbatInfoKey">City:</span>
+            <span className="rightbatInfoValue">{user.city}</span>
+          </div>
+          <div className="rightbarInfoItem">
+            <span className="rightbatInfoKey">From:</span>
+            <span className="rightbatInfoValue">{user.from}</span>
+          </div>
+          <div className="rightbarInfoItem">
+            <span className="rightbatInfoKey">Relationship:</span>
+            <span className="rightbatInfoValue">{
+              user.relationship === 1
+                ? "Single" : user.relationship === 2
+                  ? "Married"
+                  : "-"}</span>
+          </div>
         </div>
-        <div className="rightbarInfoItem">
-          <span className="rightbatInfoKey">From:</span>
-          <span className="rightbatInfoValue">Madrid</span>
+        <h4 className='rightbarTitle'>User friends</h4>
+        <div className="rightbarFollowings">
+          <div className="rightbarFollowing">
+            <img className='rightbarFollowingImg' src={`${PF}/person/1.jpeg`} alt="" />
+            <span className="rightbarFollowingName">Jhon Carter</span>
+          </div>
+          <div className="rightbarFollowing">
+            <img className='rightbarFollowingImg' src={`${PF}/person/2.jpeg`} alt="" />
+            <span className="rightbarFollowingName">Jhon Carter</span>
+          </div>
+          <div className="rightbarFollowing">
+            <img className='rightbarFollowingImg' src={`${PF}/person/3.jpeg`} alt="" />
+            <span className="rightbarFollowingName">Jhon Carter</span>
+          </div>
+          <div className="rightbarFollowing">
+            <img className='rightbarFollowingImg' src={`${PF}/person/4.jpeg`} alt="" />
+            <span className="rightbarFollowingName">Jhon Carter</span>
+          </div>
+          <div className="rightbarFollowing">
+            <img className='rightbarFollowingImg' src={`${PF}/person/5.jpeg`} alt="" />
+            <span className="rightbarFollowingName">Jhon Carter</span>
+          </div>
+          <div className="rightbarFollowing">
+            <img className='rightbarFollowingImg' src={`${PF}/person/6.jpeg`} alt="" />
+            <span className="rightbarFollowingName">Jhon Carter</span>
+          </div>
         </div>
-        <div className="rightbarInfoItem">
-          <span className="rightbatInfoKey">Relationship:</span>
-          <span className="rightbatInfoValue">Single</span>
-        </div>
-      </div>
-      <h4 className='rightbarTitle'>User friends</h4>
-      <div className="rightbarFollowings">
-        <div className="rightbarFollowing">
-          <img className='rightbarFollowingImg' src={`${PF}/person/1.jpeg`} alt="" />
-          <span className="rightbarFollowingName">Jhon Carter</span>
-        </div>
-        <div className="rightbarFollowing">
-          <img className='rightbarFollowingImg' src={`${PF}/person/2.jpeg`} alt="" />
-          <span className="rightbarFollowingName">Jhon Carter</span>
-        </div>
-        <div className="rightbarFollowing">
-          <img className='rightbarFollowingImg' src={`${PF}/person/3.jpeg`} alt="" />
-          <span className="rightbarFollowingName">Jhon Carter</span>
-        </div>
-        <div className="rightbarFollowing">
-          <img className='rightbarFollowingImg' src={`${PF}/person/4.jpeg`} alt="" />
-          <span className="rightbarFollowingName">Jhon Carter</span>
-        </div>
-        <div className="rightbarFollowing">
-          <img className='rightbarFollowingImg' src={`${PF}/person/5.jpeg`} alt="" />
-          <span className="rightbarFollowingName">Jhon Carter</span>
-        </div>
-        <div className="rightbarFollowing">
-          <img className='rightbarFollowingImg' src={`${PF}/person/6.jpeg`} alt="" />
-          <span className="rightbarFollowingName">Jhon Carter</span>
-        </div>
-      </div>
       </>
     )
   }
   return (
     <div className='rightbar'>
       <div className="rigthbarWrapper">
-        {profile ? <ProfileRightbar/> : <HomeRightbar/>}
+        {user ? <ProfileRightbar /> : <HomeRightbar />}
       </div>
     </div>
   )
