@@ -9,28 +9,53 @@ import { AuthContext } from '../../context/AuthContext'
 import { useRef } from 'react';
 import { useState } from 'react';
 import axios from 'axios'
+const myFormData = require('form-data')
 
 export default function Share() {
+
+
+
+
+
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     const { user } = useContext(AuthContext);
     const desc = useRef();
     const [file, setFile] = useState(null)
 
-    const submitHandler = async (e)=>{
+    const submitHandler = async (e) => {
+        console.log("FILE",file);
+        const ab = file;
+
         e.preventDefault();
         const newPost = {
-            userId: user._id,
-            desc: desc.current.value
+          userId: user._id,
+          desc: desc.current.value,
+        };
+        
+        if (file) {
+          const data = new FormData();
+          const fileName = Date.now() + file.name;
+          data.append("file", file);
+          data.append("name", fileName);
+          newPost.img = fileName; 
+
+        
+          try {
+            console.log("AB",ab)
+            await axios.post("/upload", {"name": fileName, "file": ab });
+          } catch (err) {
+            console.log(err);
+          }
         }
         try{
-            await axios.post('/posts', newPost)
 
+            await axios.post("posts", newPost)
         }catch(err){
+            console.log(err);
 
         }
-
-    }
-
+        
+      };
     return (
         <div className='share'>
             <div className="shareWrapper">
@@ -49,7 +74,7 @@ export default function Share() {
                         <label htmlFor="file" className="shareOption">
                             <PermMediaIcon className='shareIcon' htmlColor="tomato" />
                             <span className='shareOptionText'>Photo or Video</span>
-                            <input style={{display: "none"}} type="file" id="file" accept=".png, .jpeg, .jpg" onChange={(e)=> setFile(e.target.files[0])}/>
+                            <input style={{ display: "none" }} type="file" id="file" accept=".png, .jpeg, .jpg" onChange={(e) => setFile(e.target.files[0])} />
                         </label>
                         <div className="shareOption">
                             <LocalOfferIcon className='shareIcon' htmlColor="blue" />
