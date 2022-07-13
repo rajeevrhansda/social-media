@@ -9,7 +9,6 @@ import { AuthContext } from '../../context/AuthContext'
 import { useRef } from 'react';
 import { useState } from 'react';
 import axios from 'axios'
-const myFormData = require('form-data')
 
 export default function Share() {
 
@@ -23,8 +22,6 @@ export default function Share() {
     const [file, setFile] = useState(null)
 
     const submitHandler = async (e) => {
-        console.log("FILE",file);
-        const ab = file;
 
         e.preventDefault();
         const newPost = {
@@ -41,8 +38,7 @@ export default function Share() {
 
         
           try {
-            console.log("AB",ab)
-            await axios.post("/upload", {"name": fileName, "file": ab });
+            await axios.post("/upload", {name: fileName, file: file });
           } catch (err) {
             console.log(err);
           }
@@ -50,6 +46,7 @@ export default function Share() {
         try{
 
             await axios.post("posts", newPost)
+            window.location.reload();
         }catch(err){
             console.log(err);
 
